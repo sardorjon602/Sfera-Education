@@ -1,0 +1,24 @@
+package dto.response;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ResCategory {
+
+    private Long id;
+
+    private String name;
+
+    private String description;
+
+    private int duration;
+
+    private int questionLimit;
+
+    private String imgUrl;
+
+}

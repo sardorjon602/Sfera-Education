@@ -1,0 +1,37 @@
+package security;
+
+import entity.Student;
+import entity.User;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import repository.StudentRepository;
+import repository.UserRepository;
+
+@Service
+@RequiredArgsConstructor
+public class   CustomUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+    private final StudentRepository studentRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
+        // Avval User ni tekshiramiz
+        User user = userRepository.findByPhoneAndActiveTrue(phone).orElse(null);
+        if (user != null) {
+            return CustomUserDetails.fromUser(user);
+        }
+
+        // Agar User topilmasa → Student ni tekshiramiz
+        Student student = studentRepository.findByPhone(phone).orElse(null);
+        if (student != null) {
+            return CustomUserDetails.fromStudent(student);
+        }
+
+        // Ikkalasida ham topilmasa → exception
+        throw new UsernameNotFoundException("User yoki Student topilmadi: " + phone);
+    }
+}
