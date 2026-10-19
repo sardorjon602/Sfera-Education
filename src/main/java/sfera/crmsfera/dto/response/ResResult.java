@@ -1,0 +1,33 @@
+package sfera.crmsfera.dto.response;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import sfera.crmsfera.entity.enums.ResultStatus;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+public class ResResult {
+    private Long resultId;
+
+    private Long studentId;
+    private String studentName;
+    private Long categoryId;
+    private String categoryName;
+
+    private Integer totalScore;
+    private Integer earnedScore;
+    private Double percentage;
+
+    private ResultStatus status;
+    private Integer attemptNumber;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endTime;
+}

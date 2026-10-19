@@ -1,0 +1,24 @@
+package sfera.crmsfera.dto.response;
+
+import sfera.crmsfera.entity.enums.QuestionDifficulty;
+import lombok.*;
+
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+public class ResponseQuestion {
+    private Long id;
+    private Long resultId;
+    private String text;
+    private Integer score;
+    private QuestionDifficulty difficulty;
+    private Long categoryId;
+    private String categoryName;
+    private String file;
+    private List<ResOption> options;
+
+}

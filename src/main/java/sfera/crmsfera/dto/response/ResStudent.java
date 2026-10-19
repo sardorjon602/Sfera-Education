@@ -1,0 +1,22 @@
+package sfera.crmsfera.dto.response;
+
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ResStudent {
+
+    private Long id;
+    private String fulName;
+    private String imgUrl;
+    private String phoneNumber;
+    private Long groupId;
+    private String groupName;
+    private Long parentId;
+    private String parentName;
+    private String parentPhone;
+
+}

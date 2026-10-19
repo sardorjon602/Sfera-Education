@@ -1,0 +1,49 @@
+package sfera.crmsfera.entity;
+
+
+
+import sfera.crmsfera.entity.enums.QuestionDifficulty;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.Where;
+
+import sfera.crmsfera.entity.base.BaseEntity;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@Where(clause = "active = true")
+public class Question extends BaseEntity {
+
+    @Column(nullable = false, length = 1000)
+    private String text;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private QuestionDifficulty difficulty;
+
+    @OneToMany(
+            mappedBy = "question",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Option> options = new ArrayList<>();
+
+    @Column(nullable = false)
+    private Integer score;
+
+    private String file;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    private boolean deleted=false;
+
+
+}
